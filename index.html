@@ -1,154 +1,161 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI-Powered Waste Management</title>
-  <style>
-    /* Reset & utilities */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f4f4f4; }
-    a { text-decoration: none; color: inherit; }
-    .container { max-width: 1200px; margin: auto; padding: 0 1rem; }
-    header, section { padding: 2rem 0; }
-    .btn { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 0.5rem; background: #007BFF; color: #fff; cursor: pointer; transition: background 0.3s; }
-    .btn:hover { background: #0056b3; }
-
-    /* Header & Nav */
-    header { background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 10; }
-    nav { display: flex; justify-content: space-between; align-items: center; }
-    nav ul { display: flex; gap: 1rem; }
-    nav li { list-style: none; }
-
-    /* Hero */
-    #hero { background: url('hero-bg.jpg') center/cover no-repeat; color: #fff; text-align: center; padding: 6rem 1rem; }
-    #hero h1 { font-size: 3rem; margin-bottom: 1rem; }
-    #hero p { font-size: 1.25rem; margin-bottom: 2rem; }
-
-    /* Products */
-    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-    .card { background: #fff; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
-    .card-header { background: #e9ecef; padding: 1rem; font-weight: bold; }
-    .card-body { flex: 1; padding: 1rem; }
-    .card-body ul { list-style: disc inside; margin-top: 0.5rem; }
-    .card-footer { padding: 1rem; text-align: right; }
-
-    /* Sections */
-    h2 { margin-bottom: 1rem; color: #007BFF; }
-    iframe { width: 100%; height: 400px; border: none; border-radius: 0.5rem; }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-  </style>
+  <title>Smart.ai Waste Management</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Navbar -->
   <header>
-    <div class="container">
-      <nav>
-        <div class="logo"><strong>We AI Bins</strong></div>
-        <ul>
-          <li><a href="#products">Products</a></li>
-          <li><a href="#resources">Resources</a></li>
-          <li><a href="#company">Company</a></li>
-          <li><a href="#preorder">Pre-order</a></li>
-          <li><a href="#students">We Are Students</a></li>
-        </ul>
-      </nav>
-    </div>
+    <nav class="navbar">
+      <a href="#hero" class="logo">Smart.ai</a>
+      <ul class="nav-links">
+        <li><a href="#products">Products</a></li>
+        <li><a href="#resources">Resources</a></li>
+        <li><a href="#company">Company</a></li>
+        <li><a href="#preorder">Pre-order</a></li>
+      </ul>
+      <button class="btn preorder" id="preorder-btn">Request Demo</button>
+    </nav>
   </header>
 
-  <!-- Hero -->
-  <section id="hero">
-    <div class="container">
-      <h1>The Visionary Force in AI-Driven Waste Management</h1>
-      <p>Accelerating an economically sustainable Zero-Waste future in offices and public spaces.</p>
-      <button class="btn" onclick="scrollToSection('preorder')">Pre-order</button>
-      <button class="btn" onclick="scrollToSection('demo')">Request Demo</button>
-    </div>
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <h1>The Visionary Force in AI-Driven Waste Management</h1>
+    <p>Accelerate an economically sustainable Zero-Waste future with our smart AI-powered bins.</p>
+    <a href="#products" class="btn">Explore Products</a>
   </section>
 
-  <!-- Products -->
-  <section id="products" class="container">
+  <!-- Products Section -->
+  <section id="products" class="products">
     <h2>Our Products</h2>
-    <div class="products">
+    <div class="product-grid">
+      <!-- Office Space Bin -->
       <div class="card">
-        <div class="card-header">Office Spaces Bin</div>
-        <div class="card-body">
-          <p>AI smart bin segregates:</p>
-          <ul>
-            <li>Glass</li>
-            <li>Paper</li>
-            <li>Cardboard</li>
-            <li>Plastic</li>
-            <li>Metal</li>
-          </ul>
-        </div>
-        <div class="card-footer">
-          <strong>₹383,023</strong> <!-- 4000€ × 95.7558 on 14 May 2025 ([ecb.europa.eu](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-inr.en.html?utm_source=chatgpt.com)) -->
-        </div>
+        <h3>Office Spaces Bin</h3>
+        <p>AI-enabled bin that segregates glass, paper, cardboard, plastic, and metal in offices (enterprises & co-working spaces).</p>
+        <p class="price">Price: ₹382,748</p> <!-- 4000 € → ₹382,748 ([exchange-rates.org](https://www.exchange-rates.org/exchange-rate-history/eur-inr-2025?utm_source=chatgpt.com)) -->
+        <button class="btn order" data-product="office">Free Order</button>
       </div>
-
+      <!-- Public Space Bin -->
       <div class="card">
-        <div class="card-header">Public Spaces Bin</div>
-        <div class="card-body">
-          <p>Ideal for:</p>
-          <ul>
-            <li>Airports</li>
-            <li>Conference Halls</li>
-            <li>Railway Stations</li>
-            <li>Schools</li>
-            <li>Shopping Malls</li>
-          </ul>
-        </div>
-        <div class="card-footer">
-          <strong>₹430,901</strong> <!-- 4500€ × 95.7558 on 14 May 2025 ([ecb.europa.eu](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-inr.en.html?utm_source=chatgpt.com)) -->
-        </div>
+        <h3>Public Spaces Bin</h3>
+        <p>Robust AI bin for high-traffic areas like airports, conference halls, railway stations, schools, and malls.</p>
+        <p class="price">Price: ₹430,592</p> <!-- 4500 € → ₹430,592 ([exchange-rates.org](https://www.exchange-rates.org/exchange-rate-history/eur-inr-2025?utm_source=chatgpt.com)) -->
+        <button class="btn order" data-product="public">Free Order</button>
       </div>
     </div>
   </section>
 
-  <!-- Resources & Onboarding -->
-  <section id="resources" class="container">
-    <h2>Resources & Onboarding Guide</h2>
-    <div class="grid-2">
-      <div>
-        <h3>Empower Your Sustainability Journey</h3>
-        <p>Explore expert insights, real-world success stories, and comprehensive guides.</p>
-        <ul>
-          <li>Case Studies</li>
-          <li>Customer Stories</li>
-          <li>Onboarding</li>
-          <li>FAQ</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Onboarding Guide</h3>
-        <ol>
-          <li><strong>Initial Setup:</strong> Plug-&-play installation in under 5 minutes.</li>
-          <li><strong>Priming Period:</strong> 1–2 weeks to reach 90%+ accuracy.</li>
-          <li><strong>Official Launch:</strong> Prewritten copy & educational materials.</li>
-          <li><strong>First Month:</strong> Data insights on waste volume & savings.</li>
-        </ol>
-      </div>
+  <!-- Resources Section -->
+  <section id="resources" class="resources">
+    <h2>Resources</h2>
+    <ul>
+      <li><a href="#case-studies">Case Studies</a></li>
+      <li><a href="#onboarding">Onboarding Guide</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+
+    <!-- Case Studies Preview -->
+    <div id="case-studies" class="case-studies">
+      <article>
+        <h3>Transforming Waste Management in Co-Working Spaces</h3>
+        <img src="images/cowork-cover.jpg" alt="Co-working Case Study">
+      </article>
+      <article>
+        <h3>Unboxing the AI Decision-Making in Smart Bins</h3>
+        <img src="images/unboxing-cover.jpg" alt="Unboxing AI Smart Bin">
+      </article>
+      <a href="#" class="btn view-more">View More</a>
+    </div>
+
+    <!-- Onboarding Guide -->
+    <div id="onboarding" class="onboarding">
+      <h3>Onboarding Guide</h3>
+      <ol>
+        <li>
+          <strong>Initial Setup</strong>
+          <p>Installation takes less than 5 minutes—plug-and-play smart bin.</p>
+        </li>
+        <li>
+          <strong>Priming Period</strong>
+          <p>1–2 weeks of AI learning (70–80% accuracy initial).</p>
+        </li>
+        <li>
+          <strong>Official Launch</strong>
+          <p>Educate users with prewritten copy for optimal engagement.</p>
+        </li>
+        <li>
+          <strong>First Month</strong>
+          <p>Receive detailed analytics on waste types, volumes, and savings.</p>
+        </li>
+      </ol>
+    </div>
+
+    <!-- FAQ -->
+    <div id="faq" class="faq">
+      <h3>Frequently Asked Questions</h3>
+      <p>In case of misclassification, users can correct via the interface; data improves our AI continuously.</p>
     </div>
   </section>
 
-  <!-- Students -->
-  <section id="students" class="container">
+  <!-- Company / Student Section -->
+  <section id="company" class="company">
     <h2>We Are Students</h2>
-    <p>This site was created by <strong>Sagar, Siddhi, and Aksha</strong> to demonstrate how AI-driven waste management can become a reality.</p>
-    <button class="btn" onclick="alert('Free order coming soon!')">Free Order</button>
+    <p>Built by Sagar, Siddhi, and Aksha to turn innovative AI waste management into reality.</p>
   </section>
 
-  <!-- Video -->
-  <section id="demo" class="container">
-    <h2>Watch Our Introduction Video</h2>
-    <!-- Replace VIDEO_ID with your YouTube video ID -->
-    <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+  <!-- Video Section -->
+  <section id="video" class="video">
+    <h2>Demo Video</h2>
+    <div class="video-container">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+    </div>
   </section>
 
-  <script>
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    }
-  </script>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Smart.ai. Join our community—unsubscribe anytime. See our <a href="#">Privacy Policy</a>.</p>
+  </footer>
+  <script src="script.js"></script>
 </body>
 </html>
+
+/* styles.css */
+body { margin: 0; font-family: Arial, sans-serif; color: #333; }
+.navbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: #f7f7f7; }
+.navbar .logo { font-size: 1.5rem; font-weight: bold; }
+.nav-links { list-style: none; display: flex; gap: 1rem; }
+.btn { padding: 0.6rem 1.2rem; border: none; border-radius: 0.4rem; cursor: pointer; }
+.preorder { background: #007BFF; color: #fff; }
+.hero { text-align: center; padding: 4rem 2rem; background: #e0f7fa; }
+.products, .resources, .company, .video { padding: 2rem; }
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+.card { border: 1px solid #ddd; border-radius: 0.5rem; padding: 1.5rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.price { font-weight: bold; margin: 0.5rem 0; }
+.order { background: #28a745; color: #fff; }
+.case-studies { display: flex; gap: 1rem; margin-top: 1rem; }
+.case-studies article { flex: 1; }
+.case-studies img { width: 100%; border-radius: 0.5rem; }
+.onboarding ol { margin-top: 1rem; }
+.video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+.video-container iframe { position: absolute; top:0; left: 0; width: 100%; height: 100%; }
+.footer { text-align: center; padding: 1rem; background: #f1f1f1; }
+
+// script.js
+// Button handlers
+const orderButtons = document.querySelectorAll('.order');
+orderButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const product = btn.dataset.product;
+    alert(`Thank you! Your request for the ${product} bin has been received.`);
+  });
+});
+
+const preorderBtn = document.getElementById('preorder-btn');
+preorderBtn.addEventListener('click', () => {
+  window.location.href = '#preorder';
+});
