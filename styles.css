@@ -449,3 +449,28 @@ tr:hover {
         height: 300px;
     }
 }
+
+/* Add these styles to your CSS */
+.map-container {
+    height: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.leaflet-marker-icon {
+    border-radius: 50%;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+}
+
+.marker-popup .leaflet-popup-content {
+    text-align: center;
+    min-width: 180px;
+}
+
+.status-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}

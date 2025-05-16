@@ -125,14 +125,141 @@ function updateSensorData() {
     });
 }
 
-// Initialize map after DOM load
-window.addEventListener('DOMContentLoaded', () => {
-    // Load Google Maps API script
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap`;
-    script.async = true;
-    document.head.appendChild(script);
+// Replace the Google Maps code in script.js with this
 
-    // Update sensor data every 5 seconds
+let map;
+let markers = [];
+
+function initMap() {
+    // Initialize the map
+    map = L.map('map').setView([28.7041, 77.1025], 13);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+    }).addTo(map);
+
+    // Create initial bins
+    const bins = [
+        {
+            id: 'BIN-001',
+            coords: [28.7041, 77.1025],
+            fillLevel: 75,
+            status: 'Full',
+            lastUpdated: new Date()
+        },
+        {
+            id: 'BIN-002',
+            coords: [28.6143, 77.1996],
+            fillLevel: 30,
+            status: 'OK',
+            lastUpdated: new Date()
+        }
+    ];
+
+    // Add markers to map
+    bins.forEach(bin => {
+        const marker = L.marker(bin.coords, {
+            icon: L.divIcon({
+                className: 'custom-marker',
+                html: `<div style="background-color: ${getColor(bin.fillLevel)}; 
+                                  width: 24px; 
+                                  height: 24px; 
+                                  border-radius: 50%; 
+                                  border: 2px solid white"></div>`,
+                iconSize: [24, 24],
+                iconAnchor: [12, 12]
+            })
+        }).addTo(map);
+
+        // Add popup
+        marker.bindPopup(`
+            <div class="marker-popup">
+                <h4>${bin.id}</h4>
+                <p>Status: ${bin.status}</p>
+                <p>Fill Level: ${bin.fillLevel}%</p>
+                <p>Last Updated: ${bin.lastUpdated.toLocaleTimeString()}</p>
+            </div>
+        `);
+
+        markers.push(marker);
+    });
+
+    // Update table
+    updateTable(bins);
+}
+
+function getColor(fillLevel) {
+    return fillLevel > 80 ? '#e74c3c' :
+           fillLevel > 50 ? '#f1c40f' :
+           '#2ecc71';
+}
+
+function updateTable(bins) {
+    const tbody = document.getElementById('sensor-data');
+    tbody.innerHTML = '';
+    
+    bins.forEach(bin => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${bin.id}</td>
+            <td>${bin.coords[0].toFixed(4)}, ${bin.coords[1].toFixed(4)}</td>
+            <td>${bin.fillLevel}%</td>
+            <td>
+                <span class="status-indicator" 
+                      style="background-color: ${getColor(bin.fillLevel)}"></span>
+                ${bin.status}
+            </td>
+            <td>${bin.lastUpdated.toLocaleTimeString()}</td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// Simulate real-time updates
+function updateSensorData() {
+    markers.forEach((marker, index) => {
+        const newLevel = Math.floor(Math.random() * 100);
+        const newStatus = newLevel > 80 ? 'Full' : newLevel > 50 ? 'Filling' : 'OK';
+        
+        // Update marker
+        marker.setIcon(L.divIcon({
+            className: 'custom-marker',
+            html: `<div style="background-color: ${getColor(newLevel)}; 
+                              width: 24px; 
+                              height: 24px; 
+                              border-radius: 50%; 
+                              border: 2px solid white"></div>`,
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+        }));
+        
+        // Update popup
+        marker.setPopupContent(`
+            <div class="marker-popup">
+                <h4>${markers[index].options.id || `BIN-00${index + 1}`}</h4>
+                <p>Status: ${newStatus}</p>
+                <p>Fill Level: ${newLevel}%</p>
+                <p>Last Updated: ${new Date().toLocaleTimeString()}</p>
+            </div>
+        `);
+    });
+
+    // Update table
+    const bins = markers.map((marker, index) => ({
+        id: marker.options.id || `BIN-00${index + 1}`,
+        coords: marker.getLatLng(),
+        fillLevel: Math.floor(Math.random() * 100),
+        status: ['OK', 'Filling', 'Full'][Math.floor(Math.random() * 3)],
+        lastUpdated: new Date()
+    }));
+    
+    updateTable(bins);
+}
+
+// Initialize map when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    initMap();
     setInterval(updateSensorData, 5000);
 });
