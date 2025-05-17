@@ -263,3 +263,76 @@ document.addEventListener('DOMContentLoaded', () => {
     initMap();
     setInterval(updateSensorData, 5000);
 });
+
+// Add to script.js without modifying existing code
+// Pressure sensor simulation
+const bins = [
+    {
+        id: 'BIN-001',
+        lat: 28.7041,
+        lng: 77.1025,
+        fill: 65,
+        pressure: 3.2,
+        capacity: 50
+    },
+    {
+        id: 'BIN-002',
+        lat: 28.6143,
+        lng: 77.1996,
+        fill: 85,
+        pressure: 4.8,
+        capacity: 50
+    }
+];
+
+// Initialize OSM Map
+function initOSMMap() {
+    const map = L.map('osmMap').setView([28.7041, 77.1025], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    
+    bins.forEach(bin => {
+        L.marker([bin.lat, bin.lng])
+            .bindPopup(`
+                <strong>${bin.id}</strong><br>
+                Fill: ${bin.fill}%<br>
+                Pressure: ${bin.pressure}kg/cm²
+            `)
+            .addTo(map);
+    });
+}
+
+// Update table data
+function updateBinTable() {
+    const tbody = document.getElementById('binData');
+    tbody.innerHTML = bins.map(bin => `
+        <tr>
+            <td>${bin.id}</td>
+            <td>${bin.lat.toFixed(4)}, ${bin.lng.toFixed(4)}</td>
+            <td>${bin.fill}%</td>
+            <td>${bin.pressure}kg/cm²</td>
+            <td>
+                <span class="status-indicator" 
+                      style="background: ${bin.fill > 80 ? '#e74c3c' : bin.fill > 60 ? '#f1c40f' : '#2ecc71'}"></span>
+                ${bin.fill > bin.capacity ? 'OVERFLOW' : 'NORMAL'}
+            </td>
+        </tr>
+    `).join('');
+}
+
+// Simulate sensor updates
+function simulateSensorData() {
+    bins.forEach(bin => {
+        bin.fill = Math.min(bin.fill + Math.random() * 2, 100);
+        bin.pressure = Math.min(bin.pressure + Math.random() * 0.2, 5.5);
+    });
+    updateBinTable();
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    if(document.getElementById('osmMap')) {
+        initOSMMap();
+        updateBinTable();
+        setInterval(simulateSensorData, 3000);
+    }
+});
